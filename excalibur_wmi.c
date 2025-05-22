@@ -17,10 +17,10 @@
 #include <linux/dmi.h>
 
 /*
-	0x91, 0x57, 0x4C, 0x64, 0xB0, 0xB7, 0x23, 0x41,  // .WLd..
-	0xA9, 0x0B, 0xE9, 0x38, 0x76, 0xE0, 0xDA, 0xAD,  // ...8v...
+		0x91, 0x57, 0x4C, 0x64, 0xB0, 0xB7, 0x23, 0x41,  // .WLd..
+		0xA9, 0x0B, 0xE9, 0x38, 0x76, 0xE0, 0xDA, 0xAD,  // ...8v...
 */
-#define EXCALIBUR_WMI_GUID "91574C64-B0B7-4123-A90B-E93876E0DAAD"
+#define EXCALIBUR_WMI_GUID "644C5791-B0B7-4123-A90B-E93876E0DAAD"
 
 #define EXCALIBUR_READ 0xFA00
 #define EXCALIBUR_WRITE 0xFB00
@@ -421,11 +421,12 @@ static const struct attribute_group excalibur_group = {
 	.attrs = excalibur_attrs,
 };
 
-static int excalibur_init(struct wmi_device *wdev, struct excalibur_wmi_priv *priv)
+static int excalibur_init(struct wmi_device *wdev)
 {
 	int ret;
+	struct excalibur_wmi_priv *priv = dev_get_drvdata(&wdev->dev);
 
-	priv->hwmon_dev = devm_hwmon_device_register_with_info(&wdev->dev, "excalibur-wmi", wdev,
+	priv->hwmon_dev = devm_hwmon_device_register_with_info(&wdev->dev, "excalibur", wdev,
 														   &excalibur_wmi_hwmon_chip_info, NULL);
 	if (IS_ERR(priv->hwmon_dev))
 	{
@@ -434,7 +435,7 @@ static int excalibur_init(struct wmi_device *wdev, struct excalibur_wmi_priv *pr
 		return ret;
 	}
 
-	priv->platform_dev = devm_platform_profile_register(&wdev->dev, "excalibur-wmi", priv,
+	priv->platform_dev = devm_platform_profile_register(&wdev->dev, "excalibur_wmi", priv,
 														&excalibur_platform_profile_ops);
 	if (IS_ERR(priv->platform_dev))
 	{
@@ -478,7 +479,7 @@ static int excalibur_wmi_probe(struct wmi_device *wdev, const void *context)
 	priv->wdev = wdev;
 	dev_set_drvdata(&wdev->dev, priv);
 
-	ret = excalibur_init(wdev, priv);
+	ret = excalibur_init(wdev);
 	if (ret)
 	{
 		dev_err(&wdev->dev, "Initialization failed: %d\n", ret);
@@ -500,7 +501,7 @@ static const struct wmi_device_id excalibur_wmi_id_table[] = {
 
 static struct wmi_driver excalibur_wmi_driver = {
 	.driver = {
-		.name = "excalibur-wmi",
+		.name = "excalibur_wmi",
 		.owner = THIS_MODULE,
 	},
 	.id_table = excalibur_wmi_id_table,
@@ -514,4 +515,3 @@ MODULE_DEVICE_TABLE(wmi, excalibur_wmi_id_table);
 MODULE_AUTHOR("betelqeyza <avsarusta4422@hotmail.com>");
 MODULE_DESCRIPTION("Excalibur laptop WMI driver");
 MODULE_LICENSE("GPL");
-MODULE_ALIAS("wmi:91574C64-B0B7-4123-A90B-E93876E0DAAD");
