@@ -1,0 +1,215 @@
+# SPDX-License-Identifier: GPL-2.0
+#
+# clang-format configuration file for Linux kernel
+# Based on the official Linux kernel coding style
+#
+
+---
+# Language and standard
+Language: Cpp
+Standard: c++03
+
+# Basic formatting
+BasedOnStyle: LLVM
+IndentWidth: 8
+UseTab: Always
+TabWidth: 8
+ColumnLimit: 80
+
+# Braces
+BreakBeforeBraces: Linux
+BraceWrapping:
+  AfterClass: false
+  AfterControlStatement: false
+  AfterEnum: false
+  AfterFunction: true
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+
+# Indentation
+IndentCaseLabels: false
+IndentCaseBlocks: false
+IndentGotoLabels: true
+IndentPPDirectives: None
+IndentExternBlock: AfterExternBlock
+IndentWrappedFunctionNames: false
+
+# Spacing
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: ControlStatementsExceptForEachMacros
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: false
+SpacesInConditionalStatement: false
+SpacesInContainerLiterals: false
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceBeforeSquareBrackets: false
+
+# Line breaking
+AlignAfterOpenBracket: Align
+AlignConsecutiveMacros: false
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Left
+AlignOperands: true
+AlignTrailingComments: false
+AllowAllArgumentsOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: MultiLine
+
+# Breaking before binary operators
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: false
+BreakConstructorInitializers: BeforeColon
+BreakInheritanceList: BeforeColon
+BreakStringLiterals: false
+
+# Pointer and reference alignment
+DerivePointerAlignment: false
+PointerAlignment: Right
+
+# Include sorting (disabled for kernel)
+SortIncludes: false
+SortUsingDeclarations: false
+
+# Comments
+ReflowComments: false
+
+# Other
+Cpp11BracedListStyle: false
+CompactNamespaces: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ConstructorInitializerIndentWidth: 8
+ContinuationIndentWidth: 8
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+
+# Penalties (for line breaking decisions)
+PenaltyBreakAssignment: 10
+PenaltyBreakBeforeFirstCallParameter: 30
+PenaltyBreakComment: 10
+PenaltyBreakFirstLessLess: 0
+PenaltyBreakString: 10
+PenaltyBreakTemplateDeclaration: 10
+PenaltyExcessCharacter: 100
+PenaltyReturnTypeOnItsOwnLine: 60
+
+# Macros
+ForEachMacros:
+  - 'for_each_available_child_of_node'
+  - 'for_each_child_of_node'
+  - 'for_each_compatible_node'
+  - 'for_each_cpu'
+  - 'for_each_entry'
+  - 'for_each_node_by_name'
+  - 'for_each_node_by_type'
+  - 'for_each_node_with_property'
+  - 'for_each_online_cpu'
+  - 'for_each_pci_dev'
+  - 'for_each_populated_zone'
+  - 'for_each_possible_cpu'
+  - 'for_each_present_cpu'
+  - 'for_each_process'
+  - 'for_each_sg'
+  - 'hash_for_each'
+  - 'hash_for_each_possible'
+  - 'hash_for_each_safe'
+  - 'hlist_for_each'
+  - 'hlist_for_each_entry'
+  - 'hlist_for_each_entry_continue'
+  - 'hlist_for_each_entry_from'
+  - 'hlist_for_each_entry_rcu'
+  - 'hlist_for_each_entry_safe'
+  - 'hlist_for_each_safe'
+  - 'list_for_each'
+  - 'list_for_each_entry'
+  - 'list_for_each_entry_continue'
+  - 'list_for_each_entry_from'
+  - 'list_for_each_entry_reverse'
+  - 'list_for_each_entry_safe'
+  - 'list_for_each_entry_safe_continue'
+  - 'list_for_each_entry_safe_from'
+  - 'list_for_each_entry_safe_reverse'
+  - 'list_for_each_prev'
+  - 'list_for_each_prev_safe'
+  - 'list_for_each_safe'
+  - 'llist_for_each'
+  - 'llist_for_each_entry'
+  - 'llist_for_each_entry_safe'
+  - 'llist_for_each_safe'
+  - 'rbtree_postorder_for_each_entry_safe'
+  - 'sk_for_each'
+  - 'sk_for_each_from'
+  - 'sk_for_each_rcu'
+  - 'sk_for_each_safe'
+
+# Attribute macros (kernel specific)
+AttributeMacros:
+  - '__aligned'
+  - '__aligned_u64'
+  - '__always_inline'
+  - '__cold'
+  - '__deprecated'
+  - '__init'
+  - '__initconst'
+  - '__initdata'
+  - '__maybe_unused'
+  - '__mode'
+  - '__packed'
+  - '__printf'
+  - '__pure'
+  - '__read_mostly'
+  - '__user'
+  - '__weak'
+  - 'EXPORT_SYMBOL'
+  - 'EXPORT_SYMBOL_GPL'
+  - 'MODULE_DEVICE_TABLE'
+  - 'noinline'
+  - 'notrace'
+
+# Statement macros (kernel specific)
+StatementMacros:
+  - 'ACPI_FREE'
+  - 'DEVICE_ATTR_RO'
+  - 'DEVICE_ATTR_RW'
+  - 'DEVICE_ATTR_WO'
+  - 'INIT_LIST_HEAD'
+  - 'MODULE_AUTHOR'
+  - 'MODULE_DESCRIPTION'
+  - 'MODULE_LICENSE'
+  - 'MODULE_PARM_DESC'
+  - 'Q_OBJECT'
+
+# Type names (prevent breaking after)
+TypenameMacros:
+  - 'DECLARE_BITMAP'
+  - 'DECLARE_HASHTABLE'
+  - 'LIST_HEAD'
+  - 'RADIX_TREE'
